@@ -168,7 +168,7 @@ class ProxySQLReplicationHostgroup(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['repl_groups']) > 0)
+        return (int(check_count[0]) > 0)
 
     def get_repl_group_config(self, cursor):
         query_string = \
@@ -182,7 +182,7 @@ class ProxySQLReplicationHostgroup(object):
              self.reader_hostgroup]
 
         cursor.execute(query_string, query_data)
-        repl_group = cursor.fetchone()
+        repl_group = cursor.fetchone() # FIXME Used elsewhere
         return repl_group
 
     def create_repl_group_config(self, cursor):

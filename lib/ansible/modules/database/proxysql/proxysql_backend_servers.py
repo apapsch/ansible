@@ -237,7 +237,7 @@ class ProxySQLServer(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['host_count']) > 0)
+        return (int(check_count[0]) > 0)
 
     def check_server_config(self, cursor):
         query_string = \
@@ -259,7 +259,7 @@ class ProxySQLServer(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['host_count']) > 0)
+        return (int(check_count[0]) > 0)
 
     def get_server_config(self, cursor):
         query_string = \
@@ -275,7 +275,7 @@ class ProxySQLServer(object):
              self.port]
 
         cursor.execute(query_string, query_data)
-        server = cursor.fetchone()
+        server = cursor.fetchone() # FIXME Database structure used extensively
         return server
 
     def create_server_config(self, cursor):

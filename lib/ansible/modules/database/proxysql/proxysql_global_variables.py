@@ -119,7 +119,7 @@ def check_config(variable, value, cursor):
 
     cursor.execute(query_string, query_data)
     check_count = cursor.fetchone()
-    return (int(check_count['variable_count']) > 0)
+    return (int(check_count[0]) > 0)
 
 
 def get_config(variable, cursor):
@@ -137,7 +137,7 @@ def get_config(variable, cursor):
     resultset = cursor.fetchone()
 
     if row_count > 0:
-        return resultset
+        return resultset[0]
     else:
         return False
 

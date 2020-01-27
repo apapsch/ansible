@@ -204,7 +204,7 @@ class ProxySQLSchedule(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return int(check_count['schedule_count'])
+        return int(check_count[0])
 
     def get_schedule_config(self, cursor):
         query_string = \

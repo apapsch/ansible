@@ -304,7 +304,7 @@ class ProxyQueryRule(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['rule_count']) > 0)
+        return (int(check_count[0]) > 0)
 
     def check_rule_cfg_exists(self, cursor):
         query_string = \
@@ -328,7 +328,7 @@ class ProxyQueryRule(object):
         else:
             cursor.execute(query_string)
         check_count = cursor.fetchone()
-        return int(check_count['rule_count'])
+        return int(check_count[0])
 
     def get_rule_config(self, cursor, created_rule_id=None):
         query_string = \
@@ -340,7 +340,7 @@ class ProxyQueryRule(object):
             query_string += "\nWHERE rule_id = %s"
 
             cursor.execute(query_string, query_data)
-            rule = cursor.fetchone()
+            rule = cursor.fetchone() # FIXME Used elsewhere
         else:
             cols = 0
             query_data = []
@@ -358,7 +358,7 @@ class ProxyQueryRule(object):
                 cursor.execute(query_string, query_data)
             else:
                 cursor.execute(query_string)
-            rule = cursor.fetchall()
+            rule = cursor.fetchall() # FIXME Used elsewhere
 
         return rule
 

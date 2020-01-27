@@ -211,7 +211,7 @@ class ProxySQLUser(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['user_count']) > 0)
+        return (int(check_count[0]) > 0)
 
     def check_user_privs(self, cursor):
         query_string = \
@@ -233,7 +233,7 @@ class ProxySQLUser(object):
 
         cursor.execute(query_string, query_data)
         check_count = cursor.fetchone()
-        return (int(check_count['user_count']) > 0)
+        return (int(check_count[0]) > 0)
 
     def get_user_config(self, cursor):
         query_string = \
@@ -249,7 +249,7 @@ class ProxySQLUser(object):
              self.frontend]
 
         cursor.execute(query_string, query_data)
-        user = cursor.fetchone()
+        user = cursor.fetchone() # FIXME Used elsewhere
         return user
 
     def create_user_config(self, cursor):
